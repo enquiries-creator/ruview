@@ -62,8 +62,13 @@ cd camera-sense
    ```bash
    python run.py --config config.yaml
    ```
-   Walk toward the camera; confirm `motion → presence → approaching` fire. Tune
-   `audio.onset_rms_threshold` to your hallway's quiet-vs-noise dB.
+   Walk up the hallway toward the camera. You should see lines like:
+   ```
+   STATE motion | people=0 sound=none -52dB approach=none
+   STATE presence+motion+approaching | people=1 sound=footsteps -34dB approach=both
+   ```
+   Confirm `motion → presence → approaching` fire as you get closer. Tune
+   `audio.onset_rms_threshold` to your hallway's quiet-vs-noise dB readings.
 
 5. **Wire into Home Assistant:**
    - Check Home Assistant → Settings → Add-ons for **Mosquitto broker**
