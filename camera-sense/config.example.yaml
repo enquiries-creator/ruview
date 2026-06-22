@@ -1,0 +1,51 @@
+# camera_sense configuration — copy to config.yaml and edit.
+# Secrets can be supplied via env vars instead of this file:
+#   CAMERA_SENSE_RTSP_PASSWORD, CAMERA_SENSE_MQTT_PASSWORD
+
+camera:
+  ip: "192.168.1.75"        # your Tapo C100 (from the app: Device Info)
+  port: 554
+  username: "camerasense"   # the Tapo "Camera Account" username (see README)
+  password: ""              # set here or via CAMERA_SENSE_RTSP_PASSWORD
+  stream: "stream2"         # stream2 = lower-res/low-CPU; stream1 = 1080p
+  rtsp_transport: "tcp"
+
+vision:
+  enabled: true
+  device: "mps"             # Mac mini M4 = "mps"; use "cpu" if torch has no MPS
+  detect_every: 3           # run YOLO every 3rd frame (cheaper)
+  target_fps: 8.0
+  person_conf: 0.40
+  motion_threshold: 0.012
+  approach_growth_per_s: 0.15
+  yolo_model: "yolov8n.pt"  # auto-downloads on first run
+
+audio:
+  enabled: true
+  sample_rate: 16000
+  window_seconds: 1.0
+  hop_seconds: 0.5
+  onset_rms_threshold: 0.02 # tune to your hallway noise floor (see logs)
+  trend_seconds: 4.0
+  trend_rise_db: 4.0
+  classifier: "panns"       # "panns" for door/footstep/speech labels, or "none"
+  classifier_device: "cpu"
+
+mqtt:
+  enabled: true             # set false to just print states to the console first
+  host: "127.0.0.1"         # your Home Assistant / Mosquitto broker IP
+  port: 1883
+  username: ""
+  password: ""              # or CAMERA_SENSE_MQTT_PASSWORD
+  base_topic: "camera_sense"
+  discovery_prefix: "homeassistant"
+  node_id: "hallway_cam"
+  node_name: "Hallway Entrance Cam"
+
+fusion:
+  presence_hold_s: 8.0
+  motion_hold_s: 3.0
+  approaching_hold_s: 6.0
+  sound_event_hold_s: 4.0
+
+log_level: "INFO"
