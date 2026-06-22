@@ -1,0 +1,12 @@
+# Local config holds credentials — never commit it
+config.yaml
+
+# venv / caches
+.venv/
+__pycache__/
+*.pyc
+
+# Model weights auto-downloaded on first run
+*.pt
+*.pth
+*.onnx

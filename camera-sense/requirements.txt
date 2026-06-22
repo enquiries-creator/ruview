@@ -1,0 +1,14 @@
+# Core (required) — RTSP ingest, motion, config, MQTT
+av>=11.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+PyYAML>=6.0
+paho-mqtt>=1.6.0
+
+# Person detection (recommended) — pulls in torch; uses Apple Silicon MPS
+ultralytics>=8.1.0
+
+# Sound labels (optional) — door / footsteps / speech classification
+# Comment these out to run energy/onset + approach-trend only.
+panns-inference>=0.1.0
+torchaudio>=2.1.0
